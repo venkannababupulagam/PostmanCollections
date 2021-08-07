@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "db722626-b2a1-4590-80ee-743aeab9071d",
+		"name": "CollectionWithExternalDataFile",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateUserNestedJson",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"/* In your input JSON file, add a parent object that contains all of your nested JSON\r",
+							"* create a local variable from the nested JSON in the data file in the pre-request */\r",
+							"var inputJSONdata = pm.iterationData.get(\"user\");\r",
+							"\r",
+							"/* Create a stringified environmental variable */\r",
+							"pm.environment.set(\"envInputJSONdata\",JSON.stringify(inputJSONdata));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "/* Incase of nested JSon Data */\r\n{{envInputJSONdata}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": {{name}},\r\n    \"job\": {{job}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
